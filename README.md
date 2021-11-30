@@ -11,4 +11,4 @@
  - 修改 `模板.tex` 中標題、作者、part引用等部分
 
 ## 打印
- - 詳見 ![竖排书A5双面打印设置指南](https://blog.csdn.net/SmalOSnail/article/details/121641207)
+ - 詳見 [竖排书A5双面打印设置指南](https://blog.csdn.net/SmalOSnail/article/details/121641207)
