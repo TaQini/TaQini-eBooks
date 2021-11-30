@@ -1,0 +1,190 @@
+%!TEX program = xelatex
+%!TEX encoding = UTF-8
+
+%% if you want chinese vertical, then pass argument 'landscape' to document class,
+%% and uncomment the rotation,
+%% and change font settings to vertical.
+
+\documentclass[UTF8, nofont, landscape]{ctexbook} %% landscape, landscape
+
+%% %% landscape------------------
+\usepackage{atbegshi}
+\AtBeginShipout{%
+  \global\setbox\AtBeginShipoutBox\vbox{%
+    \special{pdf: put @thispage <</Rotate 90>>}%
+    \box\AtBeginShipoutBox
+  }%
+}%
+%% %% font
+\defaultCJKfontfeatures{RawFeature={vertical:+vert}}
+\makeatletter
+\newcommand*{\shifttext}[2]{%
+  \settowidth{\@tempdima}{#2}%
+  \makebox[\@tempdima]{\hspace*{#1}#2}%
+}%
+\makeatother
+\newcommand\ytza[1]{\shifttext{-3.5pt}{\ytzfz #1}}
+
+%% no landscape------------
+% \newcommand\ytza[1]{\raisebox{2pt}{\ytzfz #1}}
+
+
+%% common font settings
+\setCJKmainfont[BoldFont=Adobe Heiti Std,ItalicFont=Adobe Kaiti Std]{Adobe Song Std}
+\setCJKsansfont{Adobe Heiti Std}
+\setCJKmonofont{Adobe Fangsong Std}
+\newCJKfontfamily{\fzsongbig}{FZSongS-Extended}
+\newCJKfontfamily{\arpluming}{AR PL UMing CN} %這個明細體和新明細體补充顯示Adobe缺失的漢字。但它的编码库可能比Adobe还小些。
+\newCJKfontfamily{\simsun}{SimSun}
+\newCJKfontfamily{\newsimsun}{NSimSun}
+\DeclareTextFontCommand{\yt}{\arpluming}
+\DeclareTextFontCommand{\ytz}{\simsun}
+\DeclareTextFontCommand{\ytzn}{\newsimsun}
+\DeclareTextFontCommand{\ytzfz}{\fzsongbig}
+
+
+\renewcommand{\thepage}{\Chinese{page}}
+
+% \usepackage{wallpaper}
+% \ThisULCornerWallPaper{1}{竹.jpg}
+
+\usepackage{geometry}
+%% \newgeometry{
+%%   top=50pt, bottom=50pt, left=86pt, right=86pt,
+%%   headsep=5pt,
+%% }
+\newgeometry{
+  top=50pt, bottom=50pt, left=46pt, right=46pt,
+  headsep=25pt,
+}
+\savegeometry{mdGeo}
+\loadgeometry{mdGeo}
+
+
+%% \usepackage{titlesec}        % this can not be used when vertical mode
+%% %% \titleformat{\chapter}[display]
+%% %%             {\Huge\bfseries\centering}
+%% %%             {}{0pt}{#1}
+%% %% \titleformat{\chapter}[display]
+%% %%   {\centering\xingkai}
+%% %%   {}{0pt}{}
+%% \titlespacing*{\section}{0pt}{9pt}{0pt}
+%% \titlespacing*{\chapter}{0pt}{0pt}{-16pt}
+
+
+\newcommand{\pageCN}{第\thepage 页}
+
+\usepackage{fancyhdr}
+%% \usepackage{ifthen}
+\fancypagestyle{plain}{ % first page style
+    \fancyhf{}
+    %% \fancyfoot[LE,RO]{
+    %%   {\fangsong \pageCN}%偶数页
+    %% }
+}
+%% % 从第二页开始的style
+%% \fancyhf{}
+%% \fancyhead[LE]{\textit\pageCN\leftmark}  %\lishu 北航明德养生社\qquad 晨读本
+%% \fancyfoot[LE]{}
+%% \fancyfoot[RO]{\textit\pageCN\rightmark}
+%% \renewcommand{\headrulewidth}{0.5bp} % 页眉线宽度
+%% \pagestyle{fancy}
+
+
+
+%% \RequirePackage{titletoc}
+
+%% \titlecontents{chapter}[0pt]{\heiti\zihao{-4}}{\thecontentslabel\ }{}
+%%               {\hspace{.5em}\titlerule*[4pt]{$\cdot$}\contentspage}
+%%               \titlecontents{section}[2em]{\vspace{0.1\baselineskip}\songti\zihao{-4}}{\thecontentslabel\ }{}
+%%                             {\hspace{.5em}\titlerule*[4pt]{$\cdot$}\contentspage}
+%%                             \titlecontents{subsection}[4em]{\vspace{0.1\baselineskip}\songti\zihao{-4}}{\thecontentslabel\ }{}
+%% {\hspace{.5em}\titlerule*[4pt]{$\cdot$}\contentspage}
+
+
+\ctexset{
+  %% fontset = adobe,
+  today = big,
+  punct = quanjiao, %% banjiao,
+  autoindent = 0pt,
+  section = {
+    numbering = false, % 标题不显示编号
+    titleformat = \Huge,
+    format = \texttt
+  },
+  chapter = {
+    numbering = false, % 标题不显示编号
+    titleformat = \centering\Huge, % 小四号字
+    format = \textbf % 楷体
+  }
+}
+
+%% \setCJKmainfont{AdobeSongStd-Light.otf} 
+%% \setCJKmainfont{AdobeSongStd-Regular.otf} 
+%% \setCJKmainfont{AdobeFangsongStd-Regular.otf}
+% \setCJKmainfont{方正宋刻本秀楷繁体.ttf}
+% \setCJKmainfont{方正清刻本悦宋繁.ttf}
+% \setCJKmainfont{WenYue-GuDianMingChaoTi-NC-W5.otf}
+
+\title{\zihao{0}\textbf{《黃帝八十一難經》}}
+
+\author{\normalsize 由 \textit{樂行} 編輯／整理}
+\date{\normalsize\today 版}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\part{經脈診候}
+\LARGE
+\include{經脈診候}
+
+\part{經絡大數}
+\LARGE
+\include{經絡大數}
+
+\part{奇經八脈}
+\LARGE
+\include{奇經八脈}
+
+\part{榮衛三焦}
+\LARGE
+\include{榮衛三焦}
+
+\part{藏府配像}
+\LARGE
+\include{藏府配像}
+
+\part{藏府度數}
+\LARGE
+\include{藏府度數}
+
+\part{虛實邪正}
+\LARGE
+\include{虛實邪正}
+
+\part{藏府傳病}
+\LARGE
+\include{藏府傳病}
+
+\part{藏府積聚}
+\LARGE
+\include{藏府積聚}
+
+\part{泄傷寒}
+\LARGE
+\include{泄傷寒}
+
+\part{神聖工巧}
+\LARGE
+\include{神聖工巧}
+
+\part{藏府井俞}
+\LARGE
+\include{藏府井俞}
+
+\part{用鍼補瀉}
+\LARGE
+\include{用鍼補瀉}
+
+\end{document}
